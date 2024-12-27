@@ -6,6 +6,37 @@
             <h1 class='font-bold'>Posyandu Sakura RW 08</h1>
         </div>
     </x-slot:title>
+
+    <div class="flex items-center space-x-4">
+    <!-- Tombol tambah -->
+    <div class="relative group">
+        <a href="{{ route('bayi.create') }}" class='inline-block'>
+            <img src="{{ asset('img/add.png') }}" alt="add" class="w-10 h-10 cursor-pointer">
+        </a>
+        <span class="absolute left-1/2 -translate-x-1/2 bottom-14 bg-[#297F4C] text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            Tambah
+        </span>
+    </div>
+
+    <!-- Search Bar -->
+        <form action="/search" method="GET" class="relative flex-1">
+            <input 
+                type="text" 
+                name="query" 
+                placeholder="Cari sesuatu..." 
+                class="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#205937] focus:border-[#205937]"
+            >
+            <button 
+                type="submit" 
+                class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-[#205937]">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M12.9 14.32a8 8 0 111.41-1.41l4.36 4.36a1 1 0 01-1.41 1.41l-4.36-4.36zM8 14a6 6 0 100-12 6 6 0 000 12z" clip-rule="evenodd" />
+                </svg>
+            </button>
+        </form>
+    </div>
+
+
     <!-- Table Bayi -->
     <table class="table-auto w-full border-collapse border border-gray-300 mt-3">
         <thead>
