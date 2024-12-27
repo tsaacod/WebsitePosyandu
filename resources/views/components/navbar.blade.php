@@ -1,5 +1,16 @@
 <nav class="bg-[#41B06E]" x-data="{ isOpen: false }">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <div class="flex items-center">
+          <div class="shrink-0">
+            <img src="{{ asset('img/Logo_Fix.png') }}" alt="logo" class="logo">
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-4">
+              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+              <a href="/home" class="{{ request()->is('home') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
+              <a href="/bayi" class="{{ request()->is('bayi') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Bayi</a>
+              <a href="{{ route('ibu-hamil.index') }}" class="{{ request()->is('ibu-hamil*') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Ibu Hamil</a>
         <div class="flex h-16 items-center justify-between">
             <!-- Logo dan Judul -->
             <div class="flex items-center">
