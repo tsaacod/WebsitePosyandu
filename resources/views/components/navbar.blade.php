@@ -10,7 +10,7 @@
             </div>
 
             <!-- Navigasi -->
-            <div class="hidden md:flex space-x-4">
+            <div class="hidden md:flex justify-center items-center space-x-4">
                 <a href="/home" class="{{ request()->is('home') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Home</a>
                 <a href="/bayi" class="{{ request()->is('bayi') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Bayi</a>
                 <a href="/ibu-hamil" class="{{ request()->is('ibu-hamil') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Ibu Hamil</a>
