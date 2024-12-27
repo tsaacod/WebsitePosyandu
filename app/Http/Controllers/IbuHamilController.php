@@ -11,11 +11,12 @@ class IbuHamilController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        // Menampilkan daftar ibu hamil beserta bayinya
-        $ibuHamil = Ibuhamil::with('bayi')->get(); // Ambil semua data ibu hamil beserta relasi bayi
-        return view('ibu_hamil.index', compact('ibuHamil'));
-    }
+{
+    // Menampilkan daftar ibu hamil beserta bayinya
+    $ibuHamil = Ibuhamil::with('bayi')->get(); // Ambil semua data ibu hamil beserta relasi bayi
+    $title = 'Daftar Ibu Hamil'; // Definisikan title
+    return view('ibu_hamil.index', compact('ibuHamil', 'title')); // Kirim variabel ke view
+}
 
     /**
      * Show the form for creating a new resource.
