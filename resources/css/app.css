@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.logo {
+    width: 45px;
+    height: auto;
+}
+
+.logout {
+    width: 30px;
+    height: auto;
+}
