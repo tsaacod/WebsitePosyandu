@@ -31,24 +31,28 @@ class bayiController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('bayi.index');
-    }
+{
+    return view('bayi.create',[
+        'title' => 'Tambahkan Data Bayi'
+    ]);
+}
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required',
-            'tanggalLahir' => 'required',
-            'namaIbu' => 'required',
-            'namaAyah' => 'required',
-            'alamat' => 'required',
+            $validatedData = $request->validate([
+            'nama_bayi' => 'required|string|max:255',
+            'jenisKelamin' => 'required|in:Laki-laki,Perempuan',
+            'tanggalLahir' => 'required|date',
+            'namaIbu' => 'required|string|max:255',
+            'namaAyah' => 'required|string|max:255',
+            'alamat' => 'required|string|max:500',
         ]);
 
-        Bayi::create($request->all());
+        Bayi::create($validatedData);
         return redirect()->route('bayi.index')->with('success', 'Data bayi berhasil ditambahkan.');
     }
 
@@ -58,16 +62,19 @@ class bayiController extends Controller
     public function show(string $id)
     {
         $bayi = Bayi::findOrFail($id);
-        return view('bayi.show', compact('bayi'));
+        return view('bayi.show', compact('bayi'), 
+    );
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
+    public function edit(string $id){
         $bayi = Bayi::findOrFail($id);
-        return view('bayi.edit', compact('bayi'));
+        return view('bayi.edit', [
+            'bayi' => $bayi,
+            'title' => 'Edit Data Bayi'
+        ]);
     }
 
     /**
@@ -78,11 +85,12 @@ class bayiController extends Controller
         $bayi = Bayi::findOrFail($id);
 
         $request->validate([
-            'nama' => 'required',
-            'tanggalLahir' => 'required',
-            'namaIbu' => 'required',
-            'namaAyah' => 'required',
-            'alamat' => 'required',
+            'nama_bayi' => 'required|string|max:255',
+            'jenisKelamin' => 'required|in:Laki-laki,Perempuan',
+            'tanggalLahir' => 'required|date',
+            'namaIbu' => 'required|string|max:255',
+            'namaAyah' => 'required|string|max:255',
+            'alamat' => 'required|string|max:500',
         ]);
 
         $bayi->update($request->all());
