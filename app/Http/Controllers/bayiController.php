@@ -102,6 +102,7 @@ class bayiController extends Controller
      */
     public function destroy(string $id)
     {
+        $bayi = Bayi::findOrFail($id);
         $bayi->delete();
         return redirect()->route('bayi.index')->with('success', 'Data Bayi berhasil dihapus.');
     }

@@ -33,7 +33,7 @@
         </thead>
         <tbody>
             @foreach ($bayi as $data)
-                <tr class="hover:bg-gray-50">
+                <tr class="hover:bg-gray-50 text-center">
                     <td class="border border-gray-300 px-4 py-2">{{ $loop->iteration }}</td>
                     <td class="border border-gray-300 px-4 py-2">{{ $data->nama_bayi }}</td>
                     <td class="border border-gray-300 px-4 py-2">{{ $data->jenisKelamin }}</td>
@@ -42,12 +42,19 @@
                     <td class="border border-gray-300 px-4 py-2">{{ $data->namaAyah }}</td>
                     <td class="border border-gray-300 px-4 py-2">{{ $data->alamat }}</td>
                     <td class="border border-gray-300 px-4 py-2">
-                        <a href="{{ route('bayi.showDetail', $data->id) }}" class='inline-block'>
+                        <a href="{{ route('bayi.showDetail', $data->id) }}" class="inline-block">
                             <img src="{{ asset('img/view.png') }}" alt="view" class="w-6 h-6">
                         </a>
-                        <a href="{{ route('bayi.edit', $data->id) }}" class='inline-block'>
+                        <a href="{{ route('bayi.edit', $data->id) }}" class="inline-block">
                             <img src="{{ asset('img/edit.png') }}" alt="edit" class="w-6 h-6">
                         </a>
+                        <form action="{{ route('bayi.destroy', $data->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">
+                                <img src="{{ asset('img/delete.png') }}" alt="delete" class="w-6 h-6">
+                            </button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
