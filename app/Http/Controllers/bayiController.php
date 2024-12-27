@@ -24,8 +24,12 @@ class bayiController extends Controller
     {
         $bayi = Bayi::findOrFail($id);
 
-        return view('bayi.showDetail', compact('bayi'));
+        return view('bayi.showDetail', [
+            'bayi' => $bayi,
+            'title' => 'Detail Bayi',
+        ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
