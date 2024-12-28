@@ -11,12 +11,12 @@ class IbuHamilController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-{
-    // Menampilkan daftar ibu hamil beserta bayinya
-    $ibuHamil = Ibuhamil::with('bayi')->get(); // Ambil semua data ibu hamil beserta relasi bayi
-    $title = 'Daftar Ibu Hamil'; // Definisikan title
-    return view('ibu_hamil.index', compact('ibuHamil', 'title')); // Kirim variabel ke view
-}
+    {
+        // Menampilkan daftar ibu hamil
+        $ibuHamil = Ibuhamil::all(); // Ambil semua data ibu hamil
+        $title = 'Daftar Ibu Hamil'; // Definisikan title
+        return view('ibu_hamil.index', compact('ibuHamil', 'title')); // Kirim variabel ke view
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -34,10 +34,10 @@ class IbuHamilController extends Controller
     {
         // Validasi data input
         $validatedData = $request->validate([
-            'Nama' => 'required',
-            'TanggalLahir' => 'required',
-            'NoTelepon' => 'required',
-            'Alamat' => 'required',
+            'Nama' => 'required|string|max:255',
+            'TanggalLahir' => 'required|date',
+            'NoTelepon' => 'required|string|max:15',
+            'Alamat' => 'required|string|max:255',
         ]);
 
         // Menyimpan data ibu hamil baru ke database
@@ -51,8 +51,7 @@ class IbuHamilController extends Controller
      */
     public function show(Ibuhamil $ibuHamil)
     {
-        // Menampilkan detail ibu hamil beserta bayinya
-        $ibuHamil->load('bayi'); // Muat relasi bayi
+        // Menampilkan detail ibu hamil
         $nav = 'Detail Ibu Hamil - ' . $ibuHamil->Nama;
         return view('ibu_hamil.show', compact('ibuHamil', 'nav'));
     }
