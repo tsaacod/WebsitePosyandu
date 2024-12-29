@@ -10,7 +10,7 @@ class Ibuhamil extends Model
     use HasFactory;
     
     protected $table = 'ibu_hamil';
-    protected $fillable = ['Nama','TanggalLahir','NoTelepon','Alamat'];
+    protected $fillable = ['Nama','TanggalLahir','NoTelepon','Alamat','kehamilan_ke'];
  
     
 }
