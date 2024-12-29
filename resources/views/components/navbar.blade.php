@@ -1,16 +1,5 @@
 <nav class="bg-[#41B06E]" x-data="{ isOpen: false }">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex h-16 items-center justify-between">
-        <div class="flex items-center">
-          <div class="shrink-0">
-            <img src="{{ asset('img/Logo_Fix.png') }}" alt="logo" class="logo">
-          </div>
-          <div class="hidden md:block">
-            <div class="ml-10 flex items-baseline space-x-4">
-              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a href="/home" class="{{ request()->is('home') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</a>
-              <a href="/bayi" class="{{ request()->is('bayi') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Bayi</a>
-              <a href="{{ route('ibu-hamil.index') }}" class="{{ request()->is('ibu-hamil*') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Ibu Hamil</a>
         <div class="flex h-16 items-center justify-between">
             <!-- Logo dan Judul -->
             <div class="flex items-center">
@@ -21,21 +10,19 @@
             </div>
 
             <!-- Navigasi -->
-            <div class="hidden md:flex justify-center items-center space-x-4">
+            <div class="hidden md:flex items-center space-x-4">
                 <a href="/home" class="{{ request()->is('home') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Home</a>
                 <a href="/bayi" class="{{ request()->is('bayi') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Bayi</a>
-                <a href="/ibu-hamil" class="{{ request()->is('ibu-hamil') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Ibu Hamil</a>
+                <a href="{{ route('ibu-hamil.index') }}" class="{{ request()->is('ibu-hamil*') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Ibu Hamil</a>
             </div>
 
             <!-- Tombol Logout -->
             <div class="hidden md:flex items-center">
                 <div class="relative group">
                     <button type="button" @click="logout" id="logout-button" class="relative flex justify-center items-center">
-                        <img src="{{ asset('img/logout.png') }}" alt="Logout Icon" class="logout h-10 w-10 cursor-pointer" />
+                        <img src="{{ asset('img/logout.png') }}" alt="Logout Icon" class="logout h-10 w-10 cursor-pointer">
                     </button>
-                    <span class="absolute top-12 left-1/2 transform -translate-x-1/2 rounded-md bg-gray-800 text-white text-xs px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        SignOut
-                    </span>
+                    <span class="absolute top-12 left-1/2 transform -translate-x-1/2 rounded-md bg-gray-800 text-white text-xs px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">Sign Out</span>
                 </div>
             </div>
 
@@ -65,7 +52,7 @@
         </div>
         <div class="border-t border-gray-700 pb-3 pt-4">
             <div class="mt-3 space-y-1 px-2">
-                <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-[#297F4C] hover:text-white">Sign out</a>
+                <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-[#297F4C] hover:text-white">Sign Out</a>
             </div>
         </div>
     </div>
