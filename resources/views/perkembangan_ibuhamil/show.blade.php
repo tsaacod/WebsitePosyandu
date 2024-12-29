@@ -62,7 +62,7 @@
         </a>
     </div>
 
-    <!-- Tambahkan Script Chart.js -->
+    <!-- panggil chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         // Data untuk Berat Badan

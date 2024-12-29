@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ibuhamil;
 use Illuminate\Http\Request;
+use App\Models\PerkembanganIbuHamil;
 
 class IbuHamilController extends Controller
 {
@@ -48,11 +49,18 @@ class IbuHamilController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Ibuhamil $ibuHamil)
+    public function show(IbuHamil $ibuHamil)
     {
-        // Menampilkan detail ibu hamil
-        $nav = 'Detail Ibu Hamil - ' . $ibuHamil->Nama;
-        return view('ibu_hamil.show', compact('ibuHamil', 'nav'));
+        $perkembangan = PerkembanganIbuHamil::where('id_ibuHamil', $ibuHamil->id)
+            ->orderBy('Bulan', 'desc')
+            ->get();
+            
+            return view('perkembangan_ibuhamil.index', [
+                'title' => 'Detail Ibu Hamil - ' . $ibuHamil->Nama,
+                'perkembangan' => $perkembangan,
+                'ibuHamil' => $ibuHamil,
+                'selectedIbuHamil' => $ibuHamil
+        ]);
     }
 
     /**

@@ -14,7 +14,31 @@
     </div>
     </x-slot:title>
 
-    <!-- Filter Section -->
+    @if(isset($selectedIbuHamil))
+    <!-- Detail Ibu Hamil ketika msk lewat view ibu hamil -->
+    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+        <h3 class="text-xl font-semibold text-[#205937] mb-4">Informasi Ibu Hamil</h3>
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <p class="text-gray-600">Nama:</p>
+                <p class="font-semibold">{{ $selectedIbuHamil->Nama }}</p>
+            </div>
+            <div>
+                <p class="text-gray-600">Tanggal Lahir:</p>
+                <p class="font-semibold">{{ $selectedIbuHamil->TanggalLahir }}</p>
+            </div>
+            <div>
+                <p class="text-gray-600">No Telepon:</p>
+                <p class="font-semibold">{{ $selectedIbuHamil->NoTelepon }}</p>
+            </div>
+            <div>
+                <p class="text-gray-600">Alamat:</p>
+                <p class="font-semibold">{{ $selectedIbuHamil->Alamat }}</p>
+            </div>
+        </div>
+    </div>
+    @else
+    <!-- Filter Section ktika menampilkan semua perkembngan -->
     <div class="mb-6 p-4 bg-white rounded-lg shadow-sm">
         <form action="{{ route('perkembangan-ibuhamil.index') }}" method="GET" class="flex gap-4 items-end">
             <div class="flex-1">
@@ -49,23 +73,46 @@
             </button>
         </form>
     </div>
-    <div class="flex justify-end mb-4">
-        <a href="{{ route('perkembangan-ibuhamil.export-pdf') }}" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
-            Export to PDF
-        </a>
+    @endif
 
-        <a href="{{ route('perkembangan-ibuhamil.create') }}" class="bg-green-500 text-white px-4 py-2 ml-2 rounded-md hover:bg-green-600">
-            Tambah Perkembangan
+    <div class="flex justify-between mb-4">
+        @if(isset($selectedIbuHamil))
+        <script>console.log('selected',@json($selectedIbuHamil));</script>
+        <a href="{{ route('ibu-hamil.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600">
+            Kembali
         </a>
+        <div class="flex gap-2">
+            <a href="{{ route('perkembangan-ibuhamil.create', ['ibu_hamil' => $selectedIbuHamil->id]) }}" 
+               class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">
+                Tambah Perkembangan
+            </a>
+            <a href="{{ route('perkembangan-ibuhamil.export-pdf', ['ibu_hamil' => $selectedIbuHamil->id]) }}" 
+                class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
+                Export to PDF
+            </a>
+        </div>
+        @else
+        <div class="flex gap-2">
+            <a href="{{ route('perkembangan-ibuhamil.export-pdf') }}" 
+                class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
+                Export to PDF
+            </a>
+            <a href="{{ route('perkembangan-ibuhamil.create') }}" 
+               class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">
+                Tambah Perkembangan
+            </a>
+        </div>
+        @endif
     </div>
-
 
     <!-- Table -->
     <table class="w-full border-collapse">
         <thead>
             <tr class="bg-[#205937] text-white">
                 <th class="px-4 py-2 border">No</th>
+                @unless(isset($selectedIbuHamil))
                 <th class="px-4 py-2 border">Nama Ibu</th>
+                @endunless
                 <th class="px-4 py-2 border">Bulan Pemeriksaan</th>
                 <th class="px-4 py-2 border">Bulan Kehamilan</th>
                 <th class="px-4 py-2 border">Berat Badan</th>
@@ -78,7 +125,9 @@
             @foreach($perkembangan as $data)
             <tr class="hover:bg-gray-50">
                 <td class="border px-4 py-2">{{ $loop->iteration }}</td>
+                @unless(isset($selectedIbuHamil))
                 <td class="border px-4 py-2">{{ $data->ibuHamil->Nama }}</td>
+                @endunless
                 <td class="border px-4 py-2">{{ $data->Bulan->format('F Y') }}</td>
                 <td class="border px-4 py-2">{{ $data->BulanKehamilan }}</td>
                 <td class="border px-4 py-2">{{ $data->BeratBadan }} kg</td>
@@ -107,5 +156,4 @@
             @endforeach
         </tbody>
     </table>
-    </div>
 </x-layout>

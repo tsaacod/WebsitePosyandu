@@ -19,12 +19,23 @@
     </style>
 </head>
 <body>
-    <h2 style="text-align: center;">Laporan Perkembangan Ibu Hamil</h2>
+    <h2 style="text-align: center;">{{ $title }}</h2>
+    
+    @if(count($perkembangan) > 0 && $perkembangan->first()->ibu_hamil_id)
+    <div style="margin-bottom: 20px;">
+        <p><strong>Nama:</strong> {{ $perkembangan->first()->ibuHamil->Nama }}</p>
+        <p><strong>Tanggal Lahir:</strong> {{ $perkembangan->first()->ibuHamil->TanggalLahir }}</p>
+        <p><strong>Alamat:</strong> {{ $perkembangan->first()->ibuHamil->Alamat }}</p>
+    </div>
+    @endif
+
     <table>
         <thead>
             <tr>
                 <th>No</th>
+                @if(!isset($perkembangan->first()->ibu_hamil_id))
                 <th>Nama Ibu</th>
+                @endif
                 <th>Bulan Pemeriksaan</th>
                 <th>Bulan Kehamilan</th>
                 <th>Berat Badan</th>
@@ -36,7 +47,9 @@
             @foreach($perkembangan as $data)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
+                    @if(!isset($perkembangan->first()->ibu_hamil_id))
                     <td>{{ $data->ibuHamil->Nama }}</td>
+                    @endif
                     <td>{{ $data->Bulan->format('F Y') }}</td>
                     <td>{{ $data->BulanKehamilan }}</td>
                     <td>{{ $data->BeratBadan }} kg</td>

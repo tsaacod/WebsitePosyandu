@@ -2,13 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class PerkembanganIbuHamil extends Model
 {
-    /** @use HasFactory<\Database\Factories\PerkembanganIbuHamilFactory> */
-    use HasFactory;
 
     protected $table = 'perkembangan_ibuhamil';
     protected $fillable = [

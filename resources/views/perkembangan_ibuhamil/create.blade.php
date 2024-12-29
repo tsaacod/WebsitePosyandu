@@ -39,13 +39,20 @@
                     <div class="grid grid-cols-1 gap-4">
                         <div>
                             <label for="id_ibuHamil" class="block text-sm font-medium text-gray-700 mb-1">Nama Ibu Hamil</label>
-                            <select name="id_ibuHamil" id="id_ibuHamil" required 
-                                    class="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-[#297F4C] focus:border-[#297F4C]">
-                                <option value="">Pilih Ibu Hamil</option>
-                                @foreach($ibuHamil as $ibu)
-                                    <option value="{{ $ibu->id }}">{{ $ibu->Nama }}</option>
-                                @endforeach
-                            </select>
+                            @if($selectedIbuHamil)
+                                <input type="hidden" name="id_ibuHamil" value="{{ $selectedIbuHamil->id }}">
+                                <input type="text" value="{{ $selectedIbuHamil->Nama }}" 
+                                       class="w-full border border-gray-300 rounded-md px-4 py-2 bg-gray-100" 
+                                       disabled>
+                            @else
+                                <select name="id_ibuHamil" id="id_ibuHamil" required 
+                                        class="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-[#297F4C] focus:border-[#297F4C]">
+                                    <option value="">Pilih Ibu Hamil</option>
+                                    @foreach($ibuHamil as $ibu)
+                                        <option value="{{ $ibu->id }}">{{ $ibu->Nama }}</option>
+                                    @endforeach
+                                </select>
+                            @endif
                         </div>
                     </div>
 
@@ -58,7 +65,7 @@
                         </div>
                         <div>
                             <label for="BulanKehamilan" class="block text-sm font-medium text-gray-700 mb-1">Bulan Kehamilan</label>
-                            <input type="number" name="BulanKehamilan" id="BulanKehamilan" required
+                            <input type="number" name="BulanKehamilan" id="BulanKehamilan" required min="1" max="9"
                                    class="w-full border border-gray-300 rounded-md px-4 py-2 focus:ring-[#297F4C] focus:border-[#297F4C]">
                         </div>
                     </div>

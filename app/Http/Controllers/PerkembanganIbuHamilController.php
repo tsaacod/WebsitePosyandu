@@ -13,18 +13,15 @@ class PerkembanganIbuHamilController extends Controller
     {
         $query = PerkembanganIbuHamil::with('ibuHamil');
 
-        // Filter by ibu hamil
         if ($request->filled('ibu_hamil')) {
             $query->where('id_ibuHamil', $request->ibu_hamil);
         }
 
-        // Filter by bulan pemeriksaan
         if ($request->filled('bulan')) {
             $query->whereMonth('Bulan', date('m', strtotime($request->bulan)))
                 ->whereYear('Bulan', date('Y', strtotime($request->bulan)));
         }
 
-        // Filter by bulan kehamilan
         if ($request->filled('bulan_kehamilan')) {
             $query->where('BulanKehamilan', $request->bulan_kehamilan);
         }
@@ -60,12 +57,19 @@ class PerkembanganIbuHamilController extends Controller
     }
 
 
-    public function create()
+    public function create(Request $request)
     {
         $ibuHamil = IbuHamil::all();
+        $selectedIbuHamil = null;
+        
+        if ($request->has('ibu_hamil')) {
+            $selectedIbuHamil = IbuHamil::find($request->ibu_hamil);
+        }
+        
         return view('perkembangan_ibuhamil.create', [
             'title' => 'Tambah Perkembangan',
-            'ibuHamil' => $ibuHamil
+            'ibuHamil' => $ibuHamil,
+            'selectedIbuHamil' => $selectedIbuHamil
         ]);
     }
 
@@ -81,6 +85,12 @@ class PerkembanganIbuHamilController extends Controller
         ]);
 
         PerkembanganIbuHamil::create($validated);
+
+        if ($request->has('from_ibu_hamil')) {
+            return redirect()->route('perkembangan-ibuhamil.index', ['ibu_hamil' => $request->id_ibuHamil])
+                ->with('success', 'Data perkembangan berhasil ditambahkan');
+        }
+
         return redirect()->route('perkembangan-ibuhamil.index')
             ->with('success', 'Data perkembangan berhasil ditambahkan');
     }
@@ -124,16 +134,36 @@ class PerkembanganIbuHamilController extends Controller
             ->with('success', 'Data perkembangan berhasil dihapus');
     }
 
-    public function exportPdf()
+    public function exportPdf(Request $request)
     {
-        // Retrieve the data
-        $perkembangan = PerkembanganIbuHamil::with('ibuHamil')->orderBy('Bulan', 'desc')->get();
+        // var_dump($request);
+        // die();
+        if ($request->filled('ibu_hamil')) {
+            $perkembangan = PerkembanganIbuHamil::with('ibuHamil')
+                ->whereHas('ibuHamil', function($query) use ($request) {
+                    $query->where('id', $request->ibu_hamil);
+                })
+                ->orderBy('Bulan', 'desc')
+                ->get();
+                
+            if ($perkembangan->isNotEmpty()) {
+                $ibuHamil = $perkembangan->first()->ibuHamil;
+                $title = "Laporan Perkembangan Ibu Hamil - " . $ibuHamil->Nama;
+            } else {
+                $title = "Laporan Perkembangan Ibu Hamil";
+            }
+        } else {
+            $perkembangan = PerkembanganIbuHamil::with('ibuHamil')
+                ->orderBy('Bulan', 'desc')
+                ->get();
+            $title = "Laporan Perkembangan Ibu Hamil";
+        }
 
-        // Generate PDF
-        $pdf = PDF::loadView('perkembangan_ibuhamil.pdf', ['perkembangan' => $perkembangan])
-            ->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('perkembangan_ibuhamil.pdf', [
+            'perkembangan' => $perkembangan,
+            'title' => $title
+        ])->setPaper('a4', 'landscape');
 
-        // Return PDF download
         return $pdf->download('Perkembangan_Ibu_Hamil.pdf');
     }
 
