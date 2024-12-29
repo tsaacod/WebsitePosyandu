@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\bayi;
 use Illuminate\Http\Request;
+use App\Models\PerkembanganBayi;
 
 class bayiController extends Controller
 {
@@ -22,52 +23,78 @@ class bayiController extends Controller
     // Liat detail bayi
     public function showDetail(string $id)
     {
+        // Ambil data bayi berdasarkan ID
         $bayi = Bayi::findOrFail($id);
 
-        return view('bayi.showDetail', compact('bayi'));
+        // Ambil data perkembangan bayi terkait
+        $perkembangan = PerkembanganBayi::where('id_bayi', $id)->get();
+
+        // Kirimkan data ke view
+        return view('bayi.showDetail', [
+            'title' => 'Detail Bayi',
+            'bayi' => $bayi,
+            'perkembangan' => $perkembangan,
+        ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view('bayi.index');
-    }
+{
+    return view('bayi.create',[
+        'title' => 'Tambahkan Data Bayi'
+    ]);
+}
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required',
-            'tanggalLahir' => 'required',
-            'namaIbu' => 'required',
-            'namaAyah' => 'required',
-            'alamat' => 'required',
+            $validatedData = $request->validate([
+            'nama_bayi' => 'required|string|max:255',
+            'jenisKelamin' => 'required|in:Laki-laki,Perempuan',
+            'tanggalLahir' => 'required|date',
+            'namaIbu' => 'required|string|max:255',
+            'namaAyah' => 'required|string|max:255',
+            'alamat' => 'required|string|max:500',
         ]);
 
-        Bayi::create($request->all());
+        Bayi::create($validatedData);
         return redirect()->route('bayi.index')->with('success', 'Data bayi berhasil ditambahkan.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
+        // Ambil data bayi berdasarkan ID
         $bayi = Bayi::findOrFail($id);
-        return view('bayi.show', compact('bayi'));
+
+        // Ambil data perkembangan bayi terkait
+        $perkembangan = PerkembanganBayi::where('id_bayi', $id)->get();
+
+        // Kirimkan data ke view
+        return view('bayi.showDetail', [
+            'bayi' => $bayi,
+            'perkembangan' => $perkembangan,
+        ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
+    public function edit(string $id){
         $bayi = Bayi::findOrFail($id);
-        return view('bayi.edit', compact('bayi'));
+        return view('bayi.edit', [
+            'bayi' => $bayi,
+            'title' => 'Edit Data Bayi'
+        ]);
     }
 
     /**
@@ -78,11 +105,12 @@ class bayiController extends Controller
         $bayi = Bayi::findOrFail($id);
 
         $request->validate([
-            'nama' => 'required',
-            'tanggalLahir' => 'required',
-            'namaIbu' => 'required',
-            'namaAyah' => 'required',
-            'alamat' => 'required',
+            'nama_bayi' => 'required|string|max:255',
+            'jenisKelamin' => 'required|in:Laki-laki,Perempuan',
+            'tanggalLahir' => 'required|date',
+            'namaIbu' => 'required|string|max:255',
+            'namaAyah' => 'required|string|max:255',
+            'alamat' => 'required|string|max:500',
         ]);
 
         $bayi->update($request->all());
@@ -94,6 +122,7 @@ class bayiController extends Controller
      */
     public function destroy(string $id)
     {
+        $bayi = Bayi::findOrFail($id);
         $bayi->delete();
         return redirect()->route('bayi.index')->with('success', 'Data Bayi berhasil dihapus.');
     }
