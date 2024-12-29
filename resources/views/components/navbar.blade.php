@@ -14,6 +14,7 @@
                 <a href="/home" class="{{ request()->is('home') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Home</a>
                 <a href="/bayi" class="{{ request()->is('bayi') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Bayi</a>
                 <a href="{{ route('ibu-hamil.index') }}" class="{{ request()->is('ibu-hamil*') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Ibu Hamil</a>
+                <a href="/perkembangan-ibuhamil" class="{{ request()->is('perkembangan-ibuhamil*') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Perkembangan Ibu Hamil</a>
             </div>
 
             <!-- Tombol Logout -->
@@ -49,6 +50,7 @@
             <a href="/home" class="block rounded-md bg-[#297F4C] px-3 py-2 text-base font-medium text-white">Home</a>
             <a href="/bayi" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-[#297F4C] hover:text-white">Bayi</a>
             <a href="/ibu-hamil" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-[#297F4C] hover:text-white">Ibu Hamil</a>
+            <a href="/perkembangan-ibuhamil" class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-[#297F4C] hover:text-white">Perkembangan Ibu Hamil</a>
         </div>
         <div class="border-t border-gray-700 pb-3 pt-4">
             <div class="mt-3 space-y-1 px-2">

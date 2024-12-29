@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BayiController;
 use App\Http\Controllers\IbuHamilController;
+use App\Http\Controllers\PerkembanganIbuHamilController;
 
 Route::get('/home', function () {
     return view('home', ['title' => 'Home Page']);
@@ -28,4 +29,15 @@ Route::prefix('ibu-hamil')->group(function () {
     Route::put('{ibuHamil}', [IbuHamilController::class, 'update'])->name('ibu-hamil.update');
     Route::delete('{ibuHamil}', [IbuHamilController::class, 'destroy'])->name('ibu-hamil.destroy');
     Route::get('{ibuHamil}', [IbuHamilController::class, 'show'])->name('ibu-hamil.show');
+});
+
+Route::prefix('perkembangan-ibuhamil')->group(function () {
+    Route::get('/', [PerkembanganIbuHamilController::class, 'index'])->name('perkembangan-ibuhamil.index');
+    Route::get('create', [PerkembanganIbuHamilController::class, 'create'])->name('perkembangan-ibuhamil.create');
+    Route::post('/', [PerkembanganIbuHamilController::class, 'store'])->name('perkembangan-ibuhamil.store');
+    Route::get('{perkembangan}/edit', [PerkembanganIbuHamilController::class, 'edit'])->name('perkembangan-ibuhamil.edit');
+    Route::put('{perkembangan}', [PerkembanganIbuHamilController::class, 'update'])->name('perkembangan-ibuhamil.update');
+    Route::delete('{perkembangan}', [PerkembanganIbuHamilController::class, 'destroy'])->name('perkembangan-ibuhamil.destroy');
+    Route::get('{perkembangan}', [PerkembanganIbuHamilController::class, 'show'])->name('perkembangan-ibuhamil.show');
+    Route::get('/perkembangan-ibuhamil/export-pdf', [PerkembanganIbuHamilController::class, 'exportPdf'])->name('perkembangan-ibuhamil.export-pdf');
 });

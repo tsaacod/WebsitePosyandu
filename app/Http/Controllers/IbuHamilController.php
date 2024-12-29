@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Ibuhamil;
@@ -11,12 +10,12 @@ class IbuHamilController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-{
-    // Menampilkan daftar ibu hamil beserta bayinya
-    $ibuHamil = Ibuhamil::with('bayi')->get(); // Ambil semua data ibu hamil beserta relasi bayi
-    $title = 'Daftar Ibu Hamil'; // Definisikan title
-    return view('ibu_hamil.index', compact('ibuHamil', 'title')); // Kirim variabel ke view
-}
+    {
+        // Menampilkan daftar ibu hamil
+        $ibuHamil = Ibuhamil::all(); // Ambil semua data ibu hamil
+        $title = 'Daftar Ibu Hamil'; // Definisikan title
+        return view('ibu_hamil.index', compact('ibuHamil', 'title')); // Kirim variabel ke view
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -35,7 +34,7 @@ class IbuHamilController extends Controller
         // Validasi data input
         $validatedData = $request->validate([
             'Nama' => 'required',
-            'TanggalLahir' => 'required',
+            'TanggalLahir' => 'required|date',
             'NoTelepon' => 'required',
             'Alamat' => 'required',
         ]);
@@ -51,8 +50,7 @@ class IbuHamilController extends Controller
      */
     public function show(Ibuhamil $ibuHamil)
     {
-        // Menampilkan detail ibu hamil beserta bayinya
-        $ibuHamil->load('bayi'); // Muat relasi bayi
+        // Menampilkan detail ibu hamil
         $nav = 'Detail Ibu Hamil - ' . $ibuHamil->Nama;
         return view('ibu_hamil.show', compact('ibuHamil', 'nav'));
     }
@@ -73,18 +71,18 @@ class IbuHamilController extends Controller
     public function update(Request $request, $id)
     {
         // Validasi data input
-        $request->validate([
+        $validatedData = $request->validate([
             'Nama' => 'required',
-            'TanggalLahir' => 'required',
+            'TanggalLahir' => 'required|date',
             'NoTelepon' => 'required',
-            'Alamat' => 'require',
+            'Alamat' => 'required',
         ]);
 
         // Temukan ibu hamil berdasarkan ID
         $ibuHamil = Ibuhamil::findOrFail($id);
 
         // Update data ibu hamil
-        $ibuHamil->update($request->all());
+        $ibuHamil->update($validatedData);
 
         return redirect()->route('ibu-hamil.index')->with('success', 'Data Ibu Hamil berhasil diperbarui.');
     }

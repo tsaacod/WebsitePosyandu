@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('perkembangan_ibuhamil', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_ibuHamil');
+            $table->date('Bulan');
+            $table->integer('BulanKehamilan');
+            $table->float('BeratBadan');
+            $table->float('LingkarPerut');
+            $table->float('TekananDarah');
             $table->timestamps();
+
+            $table->foreign('id_ibuHamil')->references('id')->on('ibu_hamil')->onDelete('cascade');
         });
     }
 

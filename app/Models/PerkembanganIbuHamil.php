@@ -22,7 +22,7 @@ class PerkembanganIbuHamil extends Model
 
     protected $casts = [
         'Bulan' => 'date',
-        'BulanKehamilan' => 'date',
+        'BulanKehamilan' => 'integer',
         'BeratBadan' => 'float',
         'LingkarPerut' => 'float',
         'TekananDarah' => 'float'
