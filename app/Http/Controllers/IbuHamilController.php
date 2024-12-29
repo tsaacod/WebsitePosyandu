@@ -38,6 +38,7 @@ class IbuHamilController extends Controller
             'TanggalLahir' => 'required|date',
             'NoTelepon' => 'required|string|max:15',
             'Alamat' => 'required|string|max:255',
+            'kehamilan_ke' => 'required|integer',
         ]);
 
         // Menyimpan data ibu hamil baru ke database
@@ -59,34 +60,43 @@ class IbuHamilController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Ibuhamil $ibuHamil)
-    {
-        // Menampilkan form untuk mengedit data ibu hamil
-        $nav = 'Edit Ibu Hamil - ' . $ibuHamil->Nama;
-        return view('ibu_hamil.edit', compact('ibuHamil', 'nav'));
-    }
+    public function edit($id)
+{
+    $ibuHamil = IbuHamil::findOrFail($id);
+    $title = 'Edit Ibu Hamil'; // Definisikan variabel title
+    return view('ibu_hamil.edit', compact('ibuHamil', 'title'));
+}
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-    {
-        // Validasi data input
-        $request->validate([
-            'Nama' => 'required',
-            'TanggalLahir' => 'required',
-            'NoTelepon' => 'required',
-            'Alamat' => 'require',
-        ]);
+{
+    // Validasi input
+    $request->validate([
+        'Nama' => 'required|string|max:255',
+        'TanggalLahir' => 'required|date',
+        'NoTelepon' => 'required|string|max:15',
+        'Alamat' => 'required|string|max:255',
+        'kehamilan_ke' => 'required|integer|min:1',
+    ]);
 
-        // Temukan ibu hamil berdasarkan ID
-        $ibuHamil = Ibuhamil::findOrFail($id);
+    // Temukan data berdasarkan ID
+    $ibuHamil = IbuHamil::findOrFail($id);
 
-        // Update data ibu hamil
-        $ibuHamil->update($request->all());
+    // Update data
+    $ibuHamil->update([
+        'Nama' => $request->Nama,
+        'TanggalLahir' => $request->TanggalLahir,
+        'NoTelepon' => $request->NoTelepon,
+        'Alamat' => $request->Alamat,
+        'kehamilan_ke' => $request->kehamilan_ke,
+    ]);
 
-        return redirect()->route('ibu-hamil.index')->with('success', 'Data Ibu Hamil berhasil diperbarui.');
-    }
+    // Redirect ke halaman index dengan pesan sukses
+    return redirect()->route('ibu-hamil.index')->with('success', 'Data ibu hamil berhasil diperbarui.');
+}
+
 
     /**
      * Remove the specified resource from storage.

@@ -40,6 +40,12 @@
                 <textarea id="Alamat" name="Alamat" required class="mt-1 block w-full border border-gray-300 rounded-lg p-4 focus:ring-[#297F4C] focus:border-[#297F4C] transition duration-200 ease-in-out" placeholder="Masukkan Alamat"></textarea>
             </div>
 
+            <div class="mb-6">
+                <label for="kehamilan_ke" class="block text-lg font-semibold text-gray-700 mb-2">Kehamilan Ke</label>
+                <input type="number" id="kehamilan_ke" name="kehamilan_ke" required class="mt-1 block w-full border border-gray-300 rounded-lg p-4 focus:ring-[#297F4C] focus:border-[#297F4C] transition duration-200 ease-in-out" placeholder="Masukkan angka kehamilan">
+            </div>
+
+
             <div class="flex justify-end mt-6">
                 <button type="submit" class="bg-[#297F4C] text-white rounded-lg px-6 py-2 hover:bg-[#205937] transition duration-200 ease-in-out">
                     Simpan
