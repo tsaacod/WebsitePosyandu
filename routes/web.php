@@ -5,10 +5,15 @@ use App\Http\Controllers\BayiController;
 use App\Http\Controllers\IbuHamilController;
 use App\Http\Controllers\PerkembanganIbuHamilController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\Auth\LoginController;
 
 Route::get('/home', [DashboardController::class, 'index'])->name('home');
 
+
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::prefix('bayi')->group(function () {
     Route::get('/', [bayiController::class, 'index'])->name('bayi.index');
@@ -22,7 +27,7 @@ Route::prefix('bayi')->group(function () {
     
 });
 
-// Route untuk Ibu Hamil
+
 Route::prefix('ibu-hamil')->group(function () {
     Route::get('/', [IbuHamilController::class, 'index'])->name('ibu-hamil.index');
     Route::get('create', [IbuHamilController::class, 'create'])->name('ibu-hamil.create');
