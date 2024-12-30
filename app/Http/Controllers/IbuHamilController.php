@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ibuhamil;
 use Illuminate\Http\Request;
+use Carbon\Carbon; // Pastikan untuk mengimpor Carbon
 use App\Models\PerkembanganIbuHamil;
 
 class IbuHamilController extends Controller
@@ -34,10 +35,11 @@ class IbuHamilController extends Controller
     {
         // Validasi data input
         $validatedData = $request->validate([
-            'Nama' => 'required',
+            'Nama' => 'required|string|max:255',
             'TanggalLahir' => 'required|date',
-            'NoTelepon' => 'required',
-            'Alamat' => 'required',
+            'NoTelepon' => 'required|string|max:15',
+            'Alamat' => 'required|string|max:255',
+            'kehamilan_ke' => 'required|integer',
         ]);
 
         // Menyimpan data ibu hamil baru ke database
@@ -66,11 +68,11 @@ class IbuHamilController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Ibuhamil $ibuHamil)
+    public function edit($id)
     {
-        // Menampilkan form untuk mengedit data ibu hamil
-        $nav = 'Edit Ibu Hamil - ' . $ibuHamil->Nama;
-        return view('ibu_hamil.edit', compact('ibuHamil', 'nav'));
+        $ibuHamil = Ibuhamil::findOrFail($id);
+        $title = 'Edit Ibu Hamil'; // Definisikan variabel title
+        return view('ibu_hamil.edit', compact('ibuHamil', 'title'));
     }
 
     /**
@@ -78,21 +80,61 @@ class IbuHamilController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validasi data input
-        $validatedData = $request->validate([
-            'Nama' => 'required',
+        // Validasi input
+        $request->validate([
+            'Nama' => 'required|string|max:255',
             'TanggalLahir' => 'required|date',
-            'NoTelepon' => 'required',
-            'Alamat' => 'required',
+            'NoTelepon' => 'required|string|max:15',
+            'Alamat' => 'required|string|max:255',
+            'kehamilan_ke' => 'required|integer|min:1',
         ]);
 
-        // Temukan ibu hamil berdasarkan ID
+        // Temukan data berdasarkan ID
         $ibuHamil = Ibuhamil::findOrFail($id);
 
-        // Update data ibu hamil
-        $ibuHamil->update($validatedData);
+        // Update data
+        $ibuHamil->update([
+            'Nama' => $request->Nama,
+            'TanggalLahir' => $request->TanggalLahir,
+            'NoTelepon' => $request->NoTelepon,
+            'Alamat' => $request->Alamat,
+            'kehamilan_ke' => $request->kehamilan_ke,
+        ]);
 
-        return redirect()->route('ibu-hamil.index')->with('success', 'Data Ibu Hamil berhasil diperbarui.');
+        // Redirect ke halaman index dengan pesan sukses
+        return redirect()->route('ibu-hamil.index')->with('success', 'Data ibu hamil berhasil diperbarui.');
+    }
+
+    /**
+     * Visualisasi Data Kehamilan
+     */
+    public function visualisasi()
+    {
+        $ibuHamil = Ibuhamil::all();
+        $kehamilanKeCounts = $ibuHamil->groupBy('kehamilan_ke')->map->count();
+        $title = 'Visualisasi Data Kehamilan';
+
+       // Hitung usia dan kelompokkan
+$usiaCounts = [];
+foreach ($ibuHamil as $ibu) {
+    $usia = Carbon::parse($ibu->TanggalLahir)->age; // Hitung usia
+    if ($usia < 17) {
+        $usiaCounts['0-16'] = ($usiaCounts['0-16'] ?? 0) + 1; // Usia di bawah 17
+    } elseif ($usia <= 20) {
+        $usiaCounts['17-20'] = ($usiaCounts['17-20'] ?? 0) + 1; // Usia 17 hingga 20
+    } elseif ($usia <= 25) {
+        $usiaCounts['21-25'] = ($usiaCounts['21-25'] ?? 0) + 1; // Usia 21 hingga 25
+    } elseif ($usia <= 30) {
+        $usiaCounts['26-30'] = ($usiaCounts['26-30'] ?? 0) + 1; // Usia 26 hingga 30
+    } elseif ($usia <= 35) {
+        $usiaCounts['31-35'] = ($usiaCounts['31-35'] ?? 0) + 1; // Usia 31 hingga 35
+    } elseif ($usia <= 40) {
+        $usiaCounts['36-40'] = ($usiaCounts['36-40'] ?? 0) + 1; // Usia 36 hingga 40
+    } else {
+        $usiaCounts['41+'] = ($usiaCounts['41+'] ?? 0) + 1; // Usia di atas 40
+    }
+}
+        return view('ibu_hamil.visualisasi', compact('kehamilanKeCounts', 'usiaCounts', 'title'));
     }
 
     /**

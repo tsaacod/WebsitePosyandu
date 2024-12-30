@@ -20,32 +20,79 @@
 
         <form action="{{ route('ibu-hamil.store') }}" method="POST">
             @csrf
-            <div class="mb-4">
-                <label for="nama" class="block text-sm font-medium text-gray-700">Nama Ibu</label>
-                <input type="text" id="nama" name="nama" required class="mt-1 block w-full border border-gray-300 rounded-lg p-3 focus:ring-[#297F4C] focus:border-[#297F4C] transition duration-200 ease-in-out" placeholder="Masukkan nama ibu">
+            <div class="mb-6">
+                <label for="Nama" class="block text-lg font-semibold text-gray-700 mb-2">Nama Ibu</label>
+                <input type="text" id="Nama" name="Nama" required class="mt-1 block w-full border border-gray-300 rounded-lg p-4 focus:ring-[#297F4C] focus:border-[#297F4C] transition duration-200 ease-in-out" placeholder="Masukkan nama ibu">
             </div>
 
-            <div class="mb-4">
-                <label for="tanggal_lahir" class="block text-sm font-medium text-gray-700">Tanggal Lahir</label>
-                <input type="date" id="tanggal_lahir" name="tanggal_lahir" required class="mt-1 block w-full border border-gray-300 rounded-lg p-3 focus:ring-[#297F4C] focus:border-[#297F4C] transition duration-200 ease-in-out">
+            <div class="mb-6">
+                <label for="TanggalLahir" class="block text-lg font-semibold text-gray-700 mb-2">Tanggal Lahir</label>
+                <input type="date" id="TanggalLahir" name="TanggalLahir" required class="mt-1 block w-full border border-gray-300 rounded-lg p-4 focus:ring-[#297F4C] focus:border-[#297F4C] transition duration-200 ease-in-out">
             </div>
 
-            <div class="mb-4">
-                <label for="no_telepon" class="block text-sm font-medium text-gray-700">No Telepon</label>
-                <input type="text" id="no_telepon" name="no_telepon" required class="mt-1 block w-full border border-gray-300 rounded-lg p-3 focus:ring-[#297F4C] focus:border-[#297F4C] transition duration-200 ease-in-out" placeholder="Masukkan no telepon">
+            <div class="mb-6">
+                <label for="NoTelepon" class="block text-lg font-semibold text-gray-700 mb-2">No Telepon</label>
+                <input type="text" id="NoTelepon" name="NoTelepon" required class="mt-1 block w-full border border-gray-300 rounded-lg p-4 focus:ring-[#297F4C] focus:border-[#297F4C] transition duration-200 ease-in-out" placeholder="Masukkan no telepon">
             </div>
 
-            <div class="mb-4">
-                <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat</label>
-                <textarea id="alamat" name="alamat" required class="mt-1 block w-full border border-gray-300 rounded-lg p-3 focus:ring-[#297F4C] focus:border-[#297F4C] transition duration-200 ease-in-out" placeholder="Masukkan alamat"></textarea>
+            <div class="mb-6">
+                <label for="Alamat" class="block text-lg font-semibold text-gray-700 mb-2">Alamat</label>
+                <textarea id="Alamat" name="Alamat" required class="mt-1 block w-full border border-gray-300 rounded-lg p-4 focus:ring-[#297F4C] focus:border-[#297F4C] transition duration-200 ease-in-out" placeholder="Masukkan Alamat"></textarea>
             </div>
 
-            <!-- Tombol Simpan -->
-    <div class="flex justify-end mt-6"> <!-- Menambahkan mt-6 untuk jarak atas -->
-    <button type="submit" class="bg-[#297F4C] text-white rounded-lg px-6 py-2 hover:bg-[#205937] transition duration-200 ease-in-out">
-        Simpan
-    </button>
-</div>
+            <div class="mb-6">
+                <label for="kehamilan_ke" class="block text-lg font-semibold text-gray-700 mb-2">Kehamilan Ke</label>
+                <input type="number" id="kehamilan_ke" name="kehamilan_ke" required class="mt-1 block w-full border border-gray-300 rounded-lg p-4 focus:ring-[#297F4C] focus:border-[#297F4C] transition duration-200 ease-in-out" placeholder="Masukkan angka kehamilan">
+            </div>
+
+
+            <div class="flex justify-end mt-6">
+                <button type="submit" class="bg-[#297F4C] text-white rounded-lg px-6 py-2 hover:bg-[#205937] transition duration-200 ease-in-out">
+                    Simpan
+                </button>
+            </div>
         </form>
     </div>
 </x-layout>
+
+<style>
+    body {
+        background-color: #f9f9f9; 
+        font-family: 'Arial', sans-serif; 
+    }
+
+    .rounded-lg {
+        border-radius: 10px; 
+    }
+
+    input, textarea {
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+        padding: 12px; 
+        line-height: 1.5; 
+    }
+
+    input:focus, textarea:focus {
+        outline: none; 
+        box-shadow: 0 0 5px rgba( 0 , 123, 255, 0.5); 
+    }
+
+    button {
+        transition: background-color 0.3s ease; 
+    }
+
+    button:hover {
+        background-color: #205937; 
+    }
+
+    label {
+        margin-bottom: 10px; 
+    }
+
+    input, textarea {
+        margin-top: 5px; 
+    }
+
+    .mb-6 {
+        margin-bottom: 20px; 
+    }
+</style>
