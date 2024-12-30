@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('perkembanganbayi', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_bayi');
-            $table->date('Bulan');
+            $table->unsignedBigInteger('bayi_id'); // Kolom untuk menyimpan ID Bayi
+            $table->string('Bulan');
             $table->float('BeratBadan');
             $table->float('TinggiBadan');
             $table->timestamps();
-
-            $table->foreign('id_bayi')->references('id')->on('bayi')->onDelete('cascade');
+        
+            $table->foreign('bayi_id')->references('id')->on('bayi')->onDelete('cascade');
         });
+        
     }
 
     /**

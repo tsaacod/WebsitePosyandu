@@ -20,4 +20,10 @@ class bayi extends Model
 
     ];
 
+    public function PerkembanganBayi()
+    {
+        return $this->hasMany(PerkembanganBayi::class, 'bayi_id', 'id');
+        return $this->hasMany(Imunisasi::class);
+    }
+
 }
