@@ -30,6 +30,7 @@ Route::prefix('ibu-hamil')->group(function () {
     Route::get('{ibuHamil}/edit', [IbuHamilController::class, 'edit'])->name('ibu-hamil.edit');
     Route::put('/ibu-hamil/{id}', [IbuHamilController::class, 'update'])->name('ibu-hamil.update');
     Route::get('/ibu-hamil/visualisasi', [IbuHamilController::class, 'visualisasi'])->name('ibu-hamil.visualisasi');
+    Route::get('/ibu-hamil/export-pdf', [IbuHamilController::class, 'exportPDF'])->name('ibu-hamil.export-pdf');
     Route::delete('{ibuHamil}', [IbuHamilController::class, 'destroy'])->name('ibu-hamil.destroy');
     Route::get('{ibuHamil}', [IbuHamilController::class, 'show'])->name('ibu-hamil.show');
 });
