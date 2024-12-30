@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Ibuhamil;
 use Illuminate\Http\Request;
-use Carbon\Carbon; // Pastikan untuk mengimpor Carbon
+use Carbon\Carbon; 
 
 class IbuHamilController extends Controller
 {
@@ -128,6 +129,14 @@ foreach ($ibuHamil as $ibu) {
     }
 }
         return view('ibu_hamil.visualisasi', compact('kehamilanKeCounts', 'usiaCounts', 'title'));
+    }
+
+    public function exportPDF()
+    {
+        $ibuHamil = IbuHamil::all(); // Ambil semua data ibu hamil
+
+        $pdf = PDF::loadView('ibu_hamil.pdf', compact('ibuHamil')); // Ganti 'ibu_hamil.pdf' dengan nama view yang Anda buat
+        return $pdf->download('data_ibu_hamil.pdf'); // Nama file PDF yang akan diunduh
     }
 
     /**

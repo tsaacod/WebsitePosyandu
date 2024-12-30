@@ -43,7 +43,12 @@
     </button>
 </a>
 
-
+<a href="{{ route('ibu-hamil.export-pdf') }}" class='inline-block'>
+    <button class="bg-[#007bff] text-white px-4 py-2 flex items-center space-x-4 hover:scale-110 transition-transform rounded-md ml-4">
+        <i class="fas fa-file-pdf text-xl"></i>
+        <span>Download PDF</span>
+    </button>
+</a>
 
 
     <!-- Pencarian -->
@@ -103,15 +108,15 @@
   }
 
   .button-primary:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3; 
   }
 
   .button-secondary:hover {
-    background-color: #e0a800; /* Darker yellow on hover */
+    background-color: #e0a800; 
   }
 
   .button-danger:hover {
-    background-color: #c82333; /* Darker red on hover */
+    background-color: #c82333; 
   }
 </style>
 
