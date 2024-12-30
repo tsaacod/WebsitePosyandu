@@ -12,7 +12,9 @@ class PerkembanganBayi extends Model
     protected $table = 'perkembanganbayi';
 
     protected $fillable = [
+
         'bayi_id',
+        'id_bayi',
         'Bulan',
         'BeratBadan',
         'TinggiBadan',
@@ -20,6 +22,9 @@ class PerkembanganBayi extends Model
 
     public function bayi()
     {
+
         return $this->belongsTo(Bayi::class, 'bayi_id', 'id');
+        return $this->belongsTo(Bayi::class, 'id_bayi', 'id');
+
     }
 }

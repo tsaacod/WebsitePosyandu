@@ -11,12 +11,21 @@
             @method('PUT')
 
             <div class="form-group mb-4">
+
                 <label for="bayi_id" class="block text-lg font-semibold text-[#205937]">Bayi</label>
                 <select name="bayi_id" id="bayi_id" class="form-control w-full p-3 rounded-md border border-gray-300" required>
                     @foreach ($bayi as $bayiData)
                         <option value="{{ $bayiData->id }}" 
                             {{ $bayiData->id == $perkembangan->bayi_id ? 'selected' : '' }}>
                             {{ $bayiData->nama_bayi }}
+
+                <label for="id_bayi" class="block text-lg font-semibold text-[#205937]">ID Bayi</label>
+                <select name="id_bayi" id="id_bayi" class="form-control w-full p-3 rounded-md border border-gray-300" required>
+                    @foreach ($bayi as $bayiData)
+                        <option value="{{ $bayiData->id }}" 
+                            {{ $bayiData->id == $perkembangan->id_bayi ? 'selected' : '' }}>
+                            {{ $bayiData->nama_bayi }} ({{ $bayiData->namaIbu }}, {{ $bayiData->namaAyah }})
+
                         </option>
                     @endforeach
                 </select>

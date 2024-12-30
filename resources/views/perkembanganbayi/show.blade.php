@@ -8,6 +8,12 @@
 
         <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
             <div class="mb-4">
+
+                <strong class="text-lg text-[#205937]">ID Bayi:</strong>
+                <span>{{ $perkembangan->id_bayi }}</span>
+            </div>
+
+            <div class="mb-4">
                 <strong class="text-lg text-[#205937]">Nama Bayi:</strong>
                 <span>{{ $perkembangan->bayi->nama_bayi }}</span>
             </div>
