@@ -28,6 +28,7 @@ Route::prefix('ibu-hamil')->group(function () {
     Route::post('/', [IbuHamilController::class, 'store'])->name('ibu-hamil.store'); 
     Route::get('{ibuHamil}/edit', [IbuHamilController::class, 'edit'])->name('ibu-hamil.edit');
     Route::put('/ibu-hamil/{id}', [IbuHamilController::class, 'update'])->name('ibu-hamil.update');
+    Route::get('/ibu-hamil/visualisasi', [IbuHamilController::class, 'visualisasi'])->name('ibu-hamil.visualisasi');
     Route::delete('{ibuHamil}', [IbuHamilController::class, 'destroy'])->name('ibu-hamil.destroy');
     Route::get('{ibuHamil}', [IbuHamilController::class, 'show'])->name('ibu-hamil.show');
 });
