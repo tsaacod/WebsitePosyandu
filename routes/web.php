@@ -4,10 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BayiController;
 use App\Http\Controllers\IbuHamilController;
 use App\Http\Controllers\PerkembanganIbuHamilController;
+use App\Http\Controllers\DashboardController;
 
-Route::get('/home', function () {
-    return view('home', ['title' => 'Home Page']);
-});
+
+Route::get('/home', [DashboardController::class, 'index'])->name('home');
 
 
 Route::prefix('bayi')->group(function () {
