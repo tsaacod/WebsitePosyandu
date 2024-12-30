@@ -26,15 +26,25 @@
     @endif
 
     <!-- Tombol tambah -->
-    <div class="relative group inline-block mb-4"> <!-- Memberikan margin bawah -->
-        <a href="{{ route('ibu-hamil.create') }}" class='inline-block'>
-            <button class="bg-[#297F4C] text-white px-4 py-2 flex items-center space-x-4 hover:scale-110 transition-transform rounded-md">
-                <!-- Ikon Ibu Hamil -->
-                <i class="fas fa-female text-xl"></i>
-                <span>Tambah Ibu Hamil</span>
-            </button>
-        </a>
-    </div>
+<div class="relative group inline-block mb-4"> <!-- Memberikan margin bawah -->
+    <a href="{{ route('ibu-hamil.create') }}" class='inline-block'>
+        <button class="bg-[#297F4C] text-white px-4 py-2 flex items-center space-x-4 hover:scale-110 transition-transform rounded-md">
+            <!-- Ikon Ibu Hamil -->
+            <i class="fas fa-female text-xl"></i>
+            <span>Tambah Ibu Hamil</span>
+        </button>
+    </a>
+</div>
+
+<a href="{{ route('ibu-hamil.visualisasi') }}" class='inline-block'>
+    <button class="bg-[#007bff] text-white px-4 py-2 flex items-center space-x-4 hover:scale-110 transition-transform rounded-md ml-4">
+        <i class="fas fa-chart-pie text-xl"></i>
+        <span>Visualisasi Data Kehamilan</span>
+    </button>
+</a>
+
+
+
 
     <!-- Pencarian -->
     <div class="mb-6 mt-4"> <!-- Memberikan margin atas dan bawah -->
