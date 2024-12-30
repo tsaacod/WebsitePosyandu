@@ -11,3 +11,24 @@
     width: 30px;
     height: auto;
 }
+
+input::placeholder {
+    font-size: 12px;
+}
+
+.header-image {
+    background-image: url("C:\laragon\www\WebsitePosyandu\public\img\Group 7.png");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 0px;
+    margin: 0;
+}
+
+.body-style {
+    background-color: #41b06e;
+    text-align: center;
+    padding: 0px;
+    margin: 0;
+}
