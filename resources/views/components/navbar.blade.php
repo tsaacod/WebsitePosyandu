@@ -11,7 +11,7 @@
 
             <!-- Navigasi -->
             <div class="hidden md:flex items-center space-x-4">
-                <a href="/home" class="{{ request()->is('home') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Home</a>
+                <a href="/" class="{{ request()->is('home') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Home</a>
                 
                 <a href="/bayi" class="{{ request()->is('bayi') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Bayi</a>
                 
@@ -31,6 +31,8 @@
                         </div>
                     </div>
                 </div>
+                <a href="{{ route('perkembanganbayi.index') }}" class="{{ request()->is('perkembanganbayi*') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Perkembangan Bayi</a>
+                <a href="{{ route('imunisasi.index') }}" class="{{ request()->is('imunisasi*') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Imunisasi</a>
             </div>
 
             <!-- Tombol Logout -->

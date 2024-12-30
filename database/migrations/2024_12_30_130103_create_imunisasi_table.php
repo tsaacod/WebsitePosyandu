@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('imunisasi', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_bayi');
-            $table->string('JenisImunisasi');
-            $table->string('Keterangan');
+            $table->foreignId('bayi_id')->constrained('bayi')->onDelete('cascade');
+            $table->string('jenis_imunisasi');
+            $table->date('tanggal_imunisasi');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
-
-            $table->foreign('id_bayi')->references('id')->on('bayi')->onDelete('cascade');
         });
     }
 

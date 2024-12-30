@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\bayi;
 use Illuminate\Http\Request;
+use App\Models\PerkembanganBayi;
+use App\Models\Imunisasi;
 
 class bayiController extends Controller
 {
@@ -34,11 +36,20 @@ class bayiController extends Controller
     // Liat detail bayi
     public function showDetail(string $id)
     {
+        // Ambil data bayi berdasarkan ID
         $bayi = Bayi::findOrFail($id);
+
+        // Ambil data perkembangan bayi terkait
+        $perkembangan = PerkembanganBayi::where('bayi_id', $id)->get();
+
+         // Ambil data imunisasi terkait bayi
+        $imunisasi = Imunisasi::where('bayi_id', $id)->get(); 
 
         return view('bayi.showDetail', [
             'bayi' => $bayi,
             'title' => 'Detail Bayi',
+            'perkembangan' => $perkembangan,
+            'imunisasi' => $imunisasi,
         ]);
     }
 
@@ -78,8 +89,12 @@ class bayiController extends Controller
     public function show(string $id)
     {
         $bayi = Bayi::findOrFail($id);
-        return view('bayi.show', compact('bayi'), 
-    );
+
+        $perkembangan = PerkembanganBayi::where('id_bayi', $id)->get();
+        return view('bayi.showDetail', [
+            'bayi' => $bayi,
+            'perkembangan' => $perkembangan,
+        ]);
     }
 
     /**

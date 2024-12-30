@@ -4,10 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BayiController;
 use App\Http\Controllers\IbuHamilController;
 use App\Http\Controllers\PerkembanganIbuHamilController;
+use App\Http\Controllers\PerkembanganBayiController;
+use App\Http\Controllers\ImunisasiController;
 use App\Http\Controllers\DashboardController;
 
 
-Route::get('/home', [DashboardController::class, 'index'])->name('home');
+Route::get('/', [DashboardController::class, 'index'])->name('home');
 
 
 Route::prefix('bayi')->group(function () {
@@ -35,6 +37,7 @@ Route::prefix('ibu-hamil')->group(function () {
     Route::get('{ibuHamil}', [IbuHamilController::class, 'show'])->name('ibu-hamil.show');
 });
 
+// Route untuk perkembangan Ibu Hamil
 Route::prefix('perkembangan-ibuhamil')->group(function () {
     Route::get('/', [PerkembanganIbuHamilController::class, 'index'])->name('perkembangan-ibuhamil.index');
     Route::get('create', [PerkembanganIbuHamilController::class, 'create'])->name('perkembangan-ibuhamil.create');
@@ -44,4 +47,27 @@ Route::prefix('perkembangan-ibuhamil')->group(function () {
     Route::delete('{perkembangan}', [PerkembanganIbuHamilController::class, 'destroy'])->name('perkembangan-ibuhamil.destroy');
     Route::get('{perkembangan}', [PerkembanganIbuHamilController::class, 'show'])->name('perkembangan-ibuhamil.show');
     Route::get('/perkembangan-ibuhamil/export-pdf', [PerkembanganIbuHamilController::class, 'exportPdf'])->name('perkembangan-ibuhamil.export-pdf');
+});
+
+// Route untuk perkembangan Bayi
+Route::prefix('perkembanganbayi')->group(function () {
+    Route::get('/', [PerkembanganBayiController::class, 'index'])->name('perkembanganbayi.index');
+    Route::get('create', [PerkembanganBayiController::class, 'create'])->name('perkembanganbayi.create');
+    Route::post('/', [PerkembanganBayiController::class, 'store'])->name('perkembanganbayi.store');
+    Route::get('{perkembanganBayi}/edit', [PerkembanganBayiController::class, 'edit'])->name('perkembanganbayi.edit');
+    Route::put('{perkembanganBayi}', [PerkembanganBayiController::class, 'update'])->name('perkembanganbayi.update');
+    Route::delete('{perkembanganBayi}', [PerkembanganBayiController::class, 'destroy'])->name('perkembanganbayi.destroy');
+    Route::get('{perkembanganBayi}', [PerkembanganBayiController::class, 'show'])->name('perkembanganbayi.show');
+});
+
+// Routes for Immunisasi
+Route::prefix('imunisasi')->group(function () {
+    Route::get('/imunisasi/visual', [ImunisasiController::class, 'visualisasi'])->name('imunisasi.visual');
+    Route::get('/imunisasi', [ImunisasiController::class, 'index'])->name('imunisasi.index');
+    Route::get('create', [ImunisasiController::class, 'create'])->name('imunisasi.create');
+    Route::post('/', [ImunisasiController::class, 'store'])->name('imunisasi.store');
+    Route::get('{imunisasi}/edit', [ImunisasiController::class, 'edit'])->name('imunisasi.edit');
+    Route::put('{imunisasi}', [ImunisasiController::class, 'update'])->name('imunisasi.update');
+    Route::delete('{imunisasi}', [ImunisasiController::class, 'destroy'])->name('imunisasi.destroy');
+    Route::get('{imunisasi}', [ImunisasiController::class, 'show'])->name('imunisasi.show');
 });
