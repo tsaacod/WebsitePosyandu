@@ -3,10 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BayiController;
 use App\Http\Controllers\IbuHamilController;
+use App\Http\Controllers\PerkembanganIbuHamilController;
+use App\Http\Controllers\DashboardController;
 
-Route::get('/home', function () {
-    return view('home', ['title' => 'Home Page']);
-});
+
+Route::get('/home', [DashboardController::class, 'index'])->name('home');
 
 
 Route::prefix('bayi')->group(function () {
@@ -17,6 +18,8 @@ Route::prefix('bayi')->group(function () {
     Route::put('{id}', [bayiController::class, 'update'])->name('bayi.update');
     Route::delete('{id}', [bayiController::class, 'destroy'])->name('bayi.destroy');
     Route::get('{id}', [bayiController::class, 'showDetail'])->name('bayi.showDetail');
+    Route::get('/search', [bayiController::class, 'search'])->name('bayi.search');
+    
 });
 
 // Route untuk Ibu Hamil
@@ -30,4 +33,15 @@ Route::prefix('ibu-hamil')->group(function () {
     Route::get('/ibu-hamil/export-pdf', [IbuHamilController::class, 'exportPDF'])->name('ibu-hamil.export-pdf');
     Route::delete('{ibuHamil}', [IbuHamilController::class, 'destroy'])->name('ibu-hamil.destroy');
     Route::get('{ibuHamil}', [IbuHamilController::class, 'show'])->name('ibu-hamil.show');
+});
+
+Route::prefix('perkembangan-ibuhamil')->group(function () {
+    Route::get('/', [PerkembanganIbuHamilController::class, 'index'])->name('perkembangan-ibuhamil.index');
+    Route::get('create', [PerkembanganIbuHamilController::class, 'create'])->name('perkembangan-ibuhamil.create');
+    Route::post('/', [PerkembanganIbuHamilController::class, 'store'])->name('perkembangan-ibuhamil.store');
+    Route::get('{perkembangan}/edit', [PerkembanganIbuHamilController::class, 'edit'])->name('perkembangan-ibuhamil.edit');
+    Route::put('{perkembangan}', [PerkembanganIbuHamilController::class, 'update'])->name('perkembangan-ibuhamil.update');
+    Route::delete('{perkembangan}', [PerkembanganIbuHamilController::class, 'destroy'])->name('perkembangan-ibuhamil.destroy');
+    Route::get('{perkembangan}', [PerkembanganIbuHamilController::class, 'show'])->name('perkembangan-ibuhamil.show');
+    Route::get('/perkembangan-ibuhamil/export-pdf', [PerkembanganIbuHamilController::class, 'exportPdf'])->name('perkembangan-ibuhamil.export-pdf');
 });

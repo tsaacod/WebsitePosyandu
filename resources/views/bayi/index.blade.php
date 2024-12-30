@@ -1,41 +1,92 @@
 <title>{{ $title }}</title>
 <x-layout>
     <x-slot:title>
-        <div class='text-center text-2xl text-[#205937]'>
+        <div class='header-image text-center text-2xl text-[#205937]'>
             {{ $title }}
             <h1 class='font-bold'>Posyandu Sakura RW 08</h1>
         </div>
     </x-slot:title>
 
-    <div class="flex items-center space-x-4">
-    <!-- Tombol tambah -->
-    <div class="relative group">
+    <!-- Visualisasi Data -->
+    <div style="text-align: center;">
+        <h2 class="font-bold">Persentase Jenis Kelamin Bayi</h2>
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <canvas id="JenisKelamin" width="250" height="250"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const labels = @json($jenisKelamin);
+        const data = @json($counts);
+
+        const ctx = document.getElementById('JenisKelamin').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Jumlah Bayi',
+                    data: data,
+                    backgroundColor: [
+                        'rgba(65, 176, 110, 0.6)', // Warna hijau cerah
+                        'rgba(41, 127, 76, 0.6)'  // Warna hijau tua
+                    ],
+                    borderColor: [
+                        'rgba(65, 176, 110, 1)',
+                        'rgba(41, 127, 76, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+
+    <!-- Tombol Tambah -->
+    <div class="relative group inline-block mb-4">
         <a href="{{ route('bayi.create') }}" class='inline-block'>
-            <img src="{{ asset('img/add.png') }}" alt="add" class="w-10 h-10 cursor-pointer">
+            <button class="btn-tambah-bayi bg-[#297F4C] text-white px-4 py-2 flex items-center space-x-4 hover:scale-110 transition-transform rounded-md">
+                <span>Tambah Bayi</span>
+            </button>
         </a>
-        <span class="absolute left-1/2 -translate-x-1/2 bottom-14 bg-[#297F4C] text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            Tambah
-        </span>
     </div>
 
     <!-- Search Bar -->
-        <form action="/search" method="GET" class="relative flex-1">
-            <input 
-                type="text" 
-                name="query" 
-                placeholder="Cari sesuatu..." 
-                class="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#205937] focus:border-[#205937]"
-            >
-            <button 
-                type="submit" 
-                class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-[#205937]">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M12.9 14.32a8 8 0 111.41-1.41l4.36 4.36a1 1 0 01-1.41 1.41l-4.36-4.36zM8 14a6 6 0 100-12 6 6 0 000 12z" clip-rule="evenodd" />
-                </svg>
-            </button>
-        </form>
+    <div>
+        <input 
+            type="text" 
+            id="search" 
+            placeholder="🔍 Quick Search..." 
+            class="border border-gray-300 rounded-md px-4 py-2 w-full mb-4" 
+            onkeyup="searchTable()">
     </div>
 
+    <script>
+        function searchTable() {
+            const input = document.getElementById("search");
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById("bayitable");
+            const tr = table.getElementsByTagName("tr");
+
+            for (let i = 0; i < tr.length; i++) {
+                const td = tr[i].getElementsByTagName("td");
+                let found = false;
+                for (let j = 1; j < td.length; j++) {
+                    if (td[j]) {
+                        const txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                            found = true;
+                        }
+                    }
+                }
+                tr[i].style.display = found ? "" : "none";
+            }
+        }
+    </script>
 
     <!-- Table Bayi -->
     <table class="table-auto w-full border-collapse border border-gray-300 mt-3">
@@ -51,7 +102,7 @@
                 <th class="border border-gray-300 px-4 py-2">Aksi</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="bayitable">
             @foreach ($bayi as $data)
                 <tr class="hover:bg-gray-50 text-center">
                     <td class="border border-gray-300 px-4 py-2">{{ $loop->iteration }}</td>

@@ -1,7 +1,7 @@
 <title>{{ $title }}</title>
 <x-layout>
     <x-slot:title>
-        <div class="text-center text-2xl text-[#205937] mb-6">
+        <div class=" header-image text-center text-2xl text-[#205937] mb-6">
             {{ $title }}
             <h1 class="font-bold text-lg">Posyandu Sakura RW 08</h1>
         </div>
@@ -11,7 +11,7 @@
         <form action="{{ route('bayi.store') }}" method="POST">
             @csrf
             <div class="mb-4">
-                <label for="nama_bayi" class="block text-sm font-medium text-gray-700 mb-1">Nama</label>
+                <label for="nama_bayi" class="block text-sm font-bold text-[#205937] mb-1">Nama</label>
                 <input 
                     type="text" 
                     class="form-control w-full border-gray-300 rounded-md shadow-sm focus:ring-[#205937] focus:border-[#205937]" 
@@ -22,7 +22,7 @@
             </div>
 
             <div class="mb-4">
-                <label for="jenisKelamin" class="block text-sm font-medium text-gray-700 mb-1">Jenis Kelamin</label>
+                <label for="jenisKelamin" class="block text-sm font-bold text-[#205937] mb-1">Jenis Kelamin</label>
                 <select 
                     id="jenisKelamin" 
                     name="jenisKelamin" 
@@ -35,7 +35,7 @@
             </div>
 
             <div class="mb-4">
-                <label for="tanggalLahir" class="block text-sm font-medium text-gray-700 mb-1">Tanggal Lahir</label>
+                <label for="tanggalLahir" class="block text-sm font-bold text-[#205937] mb-1">Tanggal Lahir</label>
                 <input 
                     type="date" 
                     class="form-control w-full border-gray-300 rounded-md shadow-sm focus:ring-[#205937] focus:border-[#205937]" 
@@ -45,7 +45,7 @@
             </div>
 
             <div class="mb-4">
-                <label for="namaIbu" class="block text-sm font-medium text-gray-700 mb-1">Nama Ibu</label>
+                <label for="namaIbu" class="block text-sm font-bold text-[#205937] mb-1">Nama Ibu</label>
                 <input 
                     type="text" 
                     class="form-control w-full border-gray-300 rounded-md shadow-sm focus:ring-[#205937] focus:border-[#205937]" 
@@ -56,7 +56,7 @@
             </div>
 
             <div class="mb-4">
-                <label for="namaAyah" class="block text-sm font-medium text-gray-700 mb-1">Nama Ayah</label>
+                <label for="namaAyah" class="block text-sm font-bold text-[#205937] mb-1">Nama Ayah</label>
                 <input 
                     type="text" 
                     class="form-control w-full border-gray-300 rounded-md shadow-sm focus:ring-[#205937] focus:border-[#205937]" 
@@ -67,7 +67,7 @@
             </div>
 
             <div class="mb-4">
-                <label for="alamat" class="block text-sm font-medium text-gray-700 mb-1">Alamat</label>
+                <label for="alamat" class="block text-sm font-bold text-[#205937] mb-1">Alamat</label>
                 <textarea 
                     class="form-control w-full border-gray-300 rounded-md shadow-sm focus:ring-[#205937] focus:border-[#205937]" 
                     id="alamat" 

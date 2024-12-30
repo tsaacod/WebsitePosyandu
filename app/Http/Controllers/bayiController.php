@@ -12,12 +12,24 @@ class bayiController extends Controller
      */
     public function index()
     {
+        $visdatGender = Bayi::select('jenisKelamin')
+            ->selectRaw('COUNT(*) as count')
+            ->groupBy('jenisKelamin')
+            ->pluck('count', 'jenisKelamin');
+
+        $jenisKelamin = $visdatGender->keys(); 
+        $counts = $visdatGender->values();   
+    
         $bayi = Bayi::all();
+
         return view('bayi.index', [
             'title' => 'Daftar Bayi',
             'bayi' => $bayi,
+            'jenisKelamin' => $jenisKelamin,
+            'counts' => $counts  
         ]);
     }
+
 
     // Liat detail bayi
     public function showDetail(string $id)
@@ -110,4 +122,20 @@ class bayiController extends Controller
         $bayi->delete();
         return redirect()->route('bayi.index')->with('success', 'Data Bayi berhasil dihapus.');
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query'); 
+        $bayi = Bayi::where('nama_bayi', 'LIKE', '%' . $query . '%')
+                    ->get();
+
+        return view('bayi.index', [
+            'title' => 'Daftar Bayi',
+            'bayi' => $bayi,
+            'query' => $query 
+        ]);
+    }
+
+
+
 }

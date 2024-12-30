@@ -11,3 +11,24 @@
     width: 30px;
     height: auto;
 }
+
+input::placeholder {
+    font-size: 12px;
+}
+
+.header-image {
+    background-image: url("C:\laragon\www\WebsitePosyandu\public\img\Group 7.png"); /* Ganti dengan URL gambar Anda */
+    background-size: cover; /* Menyesuaikan gambar agar sesuai dengan ukuran elemen */
+    background-position: center; /* Menempatkan gambar di tengah */
+    color: white; /* Ganti warna teks agar kontras dengan gambar */
+    text-align: center; /* Teks berada di tengah */
+    padding: 0px; /* Menambahkan ruang di sekitar teks */
+    margin: 0;
+}
+
+.body-style {
+    background-color: white;
+    text-align: center;
+    padding: 0px;
+    margin: 0;
+}
