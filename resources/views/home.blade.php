@@ -5,8 +5,13 @@
     <div class ="header-image" style="display: flex; align-items: center; background-color: #E8F5E9; padding: 20px;">
     <!-- Kolom Teks -->
         <div style="flex: 1">
+<<<<<<< Updated upstream
             <h1 style="font-size: 36px; font-weight: bold; margin: 0; font-family: 'Potta One';">E-POSYANDU</h1>
             <p style="font-size: 18px; margin-top: 10px; color: black; font-weight: normal; font-family: 'Poppins';">
+=======
+            <h1 style="font-size: 36px; font-weight: bold; margin: 0;">E-POSYANDU</h1>
+            <p style="font-size: 18px; margin-top: 10px; color: black">
+>>>>>>> Stashed changes
                 Sistem yang membantu mengelola data bayi dan ibu hamil sebagai bentuk pencegahan 
                 permasalahan stunting di Indonesia. Sistem ini menyediakan visualisasi data perkembangan 
                 dari ibu hamil dan bayi.
@@ -18,9 +23,15 @@
         </div>
     </div>
 </x-slot:title>
+<<<<<<< Updated upstream
 <div class= "body-style" style="padding: 20px;">
     <h1 style="font-size: 36px; font-weight: bold; margin: 0; color: white; font-family: 'Potta One';">Data Posyandu Sakura RW 08</h1>
     <p style="font-size: 18px; margin-top: 10px; color: black; font-family: 'Poppins';"> Jumlah Bayi dan Ibu Hamil Serta Jumlah Bayi yang terdata di Posyandu Sakura RW 08</p>
+=======
+<div class= "body-style">
+    <h1 style="font-size: 36px; font-weight: bold; margin: 0; color: white">Data Posyandu Sakura RW 08</h1>
+    <p style="font-size: 18px; margin-top: 10px; color: black"> Jumlah Bayi dan Ibu Hamil Serta Jumlah Bayi yang terdata di Posyandu Sakura RW 08</p>
+>>>>>>> Stashed changes
     
 
 </div>

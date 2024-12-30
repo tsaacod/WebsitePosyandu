@@ -17,6 +17,8 @@ Route::prefix('bayi')->group(function () {
     Route::put('{id}', [bayiController::class, 'update'])->name('bayi.update');
     Route::delete('{id}', [bayiController::class, 'destroy'])->name('bayi.destroy');
     Route::get('{id}', [bayiController::class, 'showDetail'])->name('bayi.showDetail');
+    Route::get('/search', [bayiController::class, 'search'])->name('bayi.search');
+    
 });
 
 // Route untuk Ibu Hamil

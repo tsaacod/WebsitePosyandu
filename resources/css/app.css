@@ -17,12 +17,21 @@ input::placeholder {
 }
 
 .header-image {
+<<<<<<< Updated upstream
     background-image: url("C:\laragon\www\WebsitePosyandu\public\img\Group 7.png");
     background-size: cover;
     background-position: center;
     color: white;
     text-align: center;
     padding: 0px;
+=======
+    background-image: url("C:\laragon\www\WebsitePosyandu\public\img\Group 7.png"); /* Ganti dengan URL gambar Anda */
+    background-size: cover; /* Menyesuaikan gambar agar sesuai dengan ukuran elemen */
+    background-position: center; /* Menempatkan gambar di tengah */
+    color: white; /* Ganti warna teks agar kontras dengan gambar */
+    text-align: center; /* Teks berada di tengah */
+    padding: 0px; /* Menambahkan ruang di sekitar teks */
+>>>>>>> Stashed changes
     margin: 0;
 }
 

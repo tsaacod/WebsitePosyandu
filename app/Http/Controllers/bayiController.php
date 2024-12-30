@@ -110,4 +110,18 @@ class bayiController extends Controller
         $bayi->delete();
         return redirect()->route('bayi.index')->with('success', 'Data Bayi berhasil dihapus.');
     }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query'); 
+        $bayi = Bayi::where('nama_bayi', 'LIKE', '%' . $query . '%')
+                    ->get();
+
+        return view('bayi.index', [
+            'title' => 'Daftar Bayi',
+            'bayi' => $bayi,
+            'query' => $query 
+        ]);
+    }
+
 }
