@@ -34,9 +34,7 @@ class PerkembanganBayiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-
             'bayi_id' => 'required|integer',
-            'id_bayi' => 'required|integer',
             'Bulan' => 'required|date',
             'BeratBadan' => 'required|numeric',
             'TinggiBadan' => 'required|numeric',
@@ -66,9 +64,7 @@ class PerkembanganBayiController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-
             'bayi_id' => 'required|integer',
-            'id_bayi' => 'required|integer',
             'Bulan' => 'required|date',
             'BeratBadan' => 'required|numeric',
             'TinggiBadan' => 'required|numeric',
@@ -86,4 +82,3 @@ class PerkembanganBayiController extends Controller
         return redirect()->route('perkembanganbayi.index')->with('success', 'Data berhasil dihapus.');
     }
 }
-
