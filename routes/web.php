@@ -9,7 +9,7 @@ use App\Http\Controllers\ImunisasiController;
 use App\Http\Controllers\DashboardController;
 
 
-Route::get('/', [DashboardController::class, 'index'])->name('home');
+Route::get('/home', [DashboardController::class, 'index'])->name('home');
 
 
 Route::prefix('bayi')->group(function () {

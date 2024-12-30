@@ -11,9 +11,27 @@
 
             <!-- Navigasi -->
             <div class="hidden md:flex items-center space-x-4">
-                <a href="/" class="{{ request()->is('home') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Home</a>
+                <a href="/home" class="{{ request()->is('home') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Home</a>
                 
-                <a href="/bayi" class="{{ request()->is('bayi') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Bayi</a>
+                <div class="relative group">
+                    <a href="/bayi" class="{{ request()->is('bayi') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">
+                        Bayi
+                    </a>
+                    
+                    <!-- Dropdown menu for Bayi -->
+                    <div class="absolute left-0 hidden group-hover:block mt-1 w-48 bg-white rounded-md shadow-lg z-50">
+                        <div class="py-1">
+                            <a href="{{ route('perkembanganbayi.index') }}" 
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#297F4C] hover:text-white">
+                                Perkembangan Bayi
+                            </a>
+                            <a href="{{ route('imunisasi.index') }}" 
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#297F4C] hover:text-white">
+                                Imunisasi
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 
                 <div class="relative group">
                     <a href="{{ route('ibu-hamil.index') }}" 
@@ -21,19 +39,17 @@
                         Ibu Hamil
                     </a>
                     
-                    <!-- Dropdown menu -->
+                    <!-- Dropdown menu for Ibu Hamil -->
                     <div class="absolute left-0 hidden group-hover:block mt-1 w-48 bg-white rounded-md shadow-lg z-50">
                         <div class="py-1">
                             <a href="/perkembangan-ibuhamil" 
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#297F4C] hover:text-white">
-                                Perkembangan
+                                Perkembangan Ibu Hamil
                             </a>
                         </div>
                     </div>
                 </div>
-                <a href="{{ route('perkembanganbayi.index') }}" class="{{ request()->is('perkembanganbayi*') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Perkembangan Bayi</a>
-                <a href="{{ route('imunisasi.index') }}" class="{{ request()->is('imunisasi*') ? 'bg-[#297F4C] text-white' : 'text-gray-300 hover:bg-[#297F4C] hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Imunisasi</a>
-            </div>
+            </div>  
 
             <!-- Tombol Logout -->
             <div class="hidden md:flex items-center">
