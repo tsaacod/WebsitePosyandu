@@ -11,13 +11,8 @@
                 @csrf
 
                 <div class="mb-4">
-
                     <label for="bayi_id" class="text-lg text-[#205937]">ID Bayi</label>
                     <select name="bayi_id" id="bayi_id" class="border border-gray-300 rounded-md px-4 py-2 w-full" required>
-
-                    <label for="id_bayi" class="text-lg text-[#205937]">ID Bayi</label>
-                    <select name="id_bayi" id="id_bayi" class="border border-gray-300 rounded-md px-4 py-2 w-full" required>
-
                         <option value="">Pilih Bayi</option>
                         @foreach ($bayi as $item)
                             <option value="{{ $item->id }}">{{ $item->nama_bayi }}</option>
