@@ -1,9 +1,4 @@
-<x-layout>
-    <x-slot:title>
-        <h1>Login</h1>
-    </x-slot:title>
-
-    <style>
+<style>
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
@@ -119,8 +114,5 @@
                     </ul>
                 </div>
             @endif
-
-            <a href="#">Lupa Password?</a>
         </div>
     </div>
-</x-layout>

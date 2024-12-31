@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
-        return view('auth.login', ['title' => 'login']);
+        return view('auth.login', ['title' => 'Login']);
     }
 
     public function login(Request $request)
@@ -21,17 +21,20 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->intended('home'); // Ganti 'home' dengan route yang sesuai
+            $request->session()->regenerate();
+            return redirect('/home');
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+            'email' => 'Email atau password salah.',
+        ])->onlyInput('email');
     }
 
     public function logout(Request $request)
     {
         Auth::logout();
-        return redirect('/login');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken(); 
+        return redirect()->router('login');
     }
 }

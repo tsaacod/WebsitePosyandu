@@ -57,9 +57,24 @@
                     <button type="button" @click="logout" id="logout-button" class="relative flex justify-center items-center">
                         <img src="{{ asset('img/logout.png') }}" alt="Logout Icon" class="logout h-10 w-10 cursor-pointer">
                     </button>
-                    <span class="absolute top-12 left-1/2 transform -translate-x-1/2 rounded-md bg-gray-800 text-white text-xs px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">Sign Out</span>
+                    <span href="{{ route('login') }}" class="absolute top-12 left-1/2 transform -translate-x-1/2 rounded-md bg-gray-800 text-white text-xs px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">LogOut</span>
                 </div>
             </div>
+
+            <script>
+                document.getElementById('logout-button').addEventListener('click', function() {
+                    fetch('{{ route('logout') }}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    }).then(response => {
+                        window.location.href = "{{ route('login') }}";
+                    }).catch(error => {
+                        console.error('Logout error:', error);
+                    });
+                });
+            </script>
 
             <!-- Tombol Menu Mobile -->
             <div class="-mr-2 flex md:hidden">
@@ -110,7 +125,7 @@
         </div>
         <div class="border-t border-gray-700 pb-3 pt-4">
             <div class="mt-3 space-y-1 px-2">
-                <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-[#297F4C] hover:text-white">Sign Out</a>
+                <a href="{{ route('login') }}" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-[#297F4C] hover:text-white">LogOut</a>
             </div>
         </div>
     </div>
