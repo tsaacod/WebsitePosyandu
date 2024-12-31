@@ -36,13 +36,10 @@ class bayiController extends Controller
     // Liat detail bayi
     public function showDetail(string $id)
     {
-        // Ambil data bayi berdasarkan ID
         $bayi = Bayi::findOrFail($id);
 
-        // Ambil data perkembangan bayi terkait
         $perkembangan = PerkembanganBayi::where('bayi_id', $id)->get();
 
-         // Ambil data imunisasi terkait bayi
         $imunisasi = Imunisasi::where('bayi_id', $id)->get(); 
 
         return view('bayi.showDetail', [
